@@ -1,0 +1,17 @@
+RewriteEngine On
+# HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://www.rm-agencement.fr%{REQUEST_URI} [L,R=301]
+# rm-agencement.fr -> www.rm-agencement.fr
+RewriteCond %{HTTP_HOST} ^rm-agencement\.fr$ [NC]
+RewriteRule ^ https://www.rm-agencement.fr%{REQUEST_URI} [L,R=301]
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType font/woff2 "access plus 1 year"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType text/javascript "access plus 1 month"
+</IfModule>
