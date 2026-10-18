@@ -44,8 +44,7 @@
       });
       return ok;
     };
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    var openWa = function () {
       if (!check()) { status.textContent = "Il manque une information, voir les champs en rouge."; return; }
       var url = "https://wa.me/" + form.dataset.wa + "?text=" + encodeURIComponent(build());
       var a = document.getElementById("wa-link");
@@ -53,7 +52,28 @@
       a.hidden = false;
       status.textContent = "Votre message est prêt. Ouvrez WhatsApp pour l'envoyer.";
       a.click();
+    };
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!check()) { status.textContent = "Il manque une information, voir les champs en rouge."; return; }
+      var bot = document.getElementById("f-bot");
+      if (bot && bot.checked) return;
+      var chatEl = document.getElementById("chat");
+      var key = chatEl && chatEl.dataset.key;
+      if (!key) { openWa(); return; }
+      var btn = form.querySelector('button[type="submit"]');
+      var val = function (id) { return (document.getElementById(id).value || "").trim(); };
+      btn.disabled = true;
+      status.textContent = "Envoi en cours…";
+      fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ access_key: key, subject: "Demande de devis : " + val("f-type") + " à " + val("f-ville"), from_name: "Site RM Agencement", message: build() }) })
+        .then(function (r) { return r.json(); })
+        .then(function (r) { if (r.success) { status.textContent = "C'est envoyé. Mickael vous rappelle sous 48 h, en semaine."; form.reset(); } else throw 0; })
+        .catch(function () { status.textContent = "L'envoi n'a pas marché. Écrivez-nous par WhatsApp ou par e-mail, ou appelez le 06 09 88 67 01."; })
+        .then(function () { btn.disabled = false; });
     });
+    var wab = document.getElementById("wa-btn");
+    if (wab) wab.addEventListener("click", openWa);
     var mail = document.getElementById("mail-btn");
     if (mail) {
       mail.addEventListener("click", function () {
