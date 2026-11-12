@@ -7,11 +7,11 @@
 
   /* ---- À REMPLIR une fois la conversion créée dans Google Ads ---- */
   var CFG = {
-    adsId: "",                 // ex. "AW-123456789"
+    adsId: "AW-10874649933",
     labels: {
-      devis: "",               // conversion « Demande de devis »
-      appel: "",               // conversion « Clic sur le téléphone »
-      whatsapp: ""             // conversion « Clic WhatsApp »
+      devis: "t2DPCOnXnLcdEM36t8Eo",  // conversion « Demande de devis »
+      appel: "",                      // à créer : clic sur le téléphone
+      whatsapp: ""                    // à créer : clic WhatsApp
     }
   };
   /* ---------------------------------------------------------------- */
