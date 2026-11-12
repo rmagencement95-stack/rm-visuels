@@ -68,7 +68,7 @@
       fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ access_key: key, subject: "Demande de devis : " + val("f-type") + " à " + val("f-ville"), from_name: "Site RM Agencement", message: build() }) })
         .then(function (r) { return r.json(); })
-        .then(function (r) { if (r.success) { status.textContent = "C'est envoyé. Mickael vous rappelle sous 48 h, en semaine."; form.reset(); } else throw 0; })
+        .then(function (r) { if (r.success) { if (window.rmTrack) window.rmTrack("devis"); status.textContent = "C'est envoyé. Mickael vous rappelle sous 48 h, en semaine."; form.reset(); } else throw 0; })
         .catch(function () { status.textContent = "L'envoi n'a pas marché. Écrivez-nous par WhatsApp ou par e-mail, ou appelez le 06 09 88 67 01."; })
         .then(function () { btn.disabled = false; });
     });
@@ -183,7 +183,7 @@
         fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({ access_key: key, subject: "Demande de devis : " + data.travaux + " à " + data.ville, from_name: "Site RM Agencement", message: summary() }) })
           .then(function (r) { return r.json(); })
-          .then(function (r) { if (r.success) say("C’est envoyé. Mickael vous rappelle sous 48 h, en semaine."); else throw 0; })
+          .then(function (r) { if (r.success) { if (window.rmTrack) window.rmTrack("devis"); say("C’est envoyé. Mickael vous rappelle sous 48 h, en semaine."); } else throw 0; })
           .catch(function () { say("L’envoi n’a pas marché. Vous pouvez nous l’envoyer directement :"); manual(); });
       } else {
         say("Merci " + data.nom + ". Votre demande est prête. Choisissez comment nous l’envoyer :"); manual();
