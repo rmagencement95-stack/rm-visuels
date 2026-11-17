@@ -9,9 +9,9 @@
   var CFG = {
     adsId: "AW-10874649933",
     labels: {
-      devis: "t2DPCOnXnLcdEM36t8Eo",  // conversion « Demande de devis »
-      appel: "",                      // à créer : clic sur le téléphone
-      whatsapp: ""                    // à créer : clic WhatsApp
+      devis: "t2DPCOnXnLcdEM36t8Eo",    // conversion « Demande de devis »
+      appel: "W__lCNvVgbodEM36t8Eo",    // conversion « Appel depuis le site »
+      whatsapp: "J9x2CN7VgbodEM36t8Eo"  // conversion « Contact WhatsApp »
     }
   };
   /* ---------------------------------------------------------------- */
